@@ -88,13 +88,17 @@ export const updateStation = async (req: Request, res: Response) => {
 	}
 	//update a station
 	try {
+		const ownerCompany = await Company.findOne(req.body.ownerCompanyId);
+		const stationType = await StationType.findOne(req.body.stationTypeId);
 		const station = await Station.update(req.params.id, {
+			company: ownerCompany,
+			stationType: stationType,
 			name: req.body.name,
 		});
 		res.status(200).send({
 			"success": true,
 			"statusCode": 200,
-			"message": "Station updated successfully",
+			"message": "Successfully updated the Station",
 			"result": station
 		});
 	} catch (err) {
@@ -126,6 +130,4 @@ export const deleteStation = async (req: Request, res: Response) => {
 		});
 	}
 }
-
-// Path: routes/station.routes.ts
 

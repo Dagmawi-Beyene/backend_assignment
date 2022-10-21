@@ -22,6 +22,7 @@ export class Station extends BaseEntity {
 	@Column({ unique: true })
 	name: string;
 
+
 	@CreateDateColumn()
 	created_at: Date;
 
@@ -32,7 +33,8 @@ export class Station extends BaseEntity {
 	@JoinColumn({ name: 'company_id' })
 	company: Company;
 
-	@OneToOne(() => StationType)
+	@ManyToOne(() => StationType, stationType => stationType.station)
+	@JoinColumn({ name: 'station_type_id' })
 	stationType: StationType;
 
 }

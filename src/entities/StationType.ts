@@ -6,7 +6,8 @@ import {
 	UpdateDateColumn,
 	PrimaryGeneratedColumn,
 	BaseEntity,
-	OneToOne
+	OneToOne,
+	OneToMany
 } from 'typeorm';
 import { Station } from './Station';
 
@@ -21,6 +22,9 @@ export class StationType extends BaseEntity{
 
 	@Column()
 	maxPower: number;
+
+	@OneToMany(() => Station, station => station.stationType)
+	station: Station;
 
 	@CreateDateColumn()
 	created_at: Date;
