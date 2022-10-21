@@ -51,6 +51,15 @@ export const createCompany = async (req: Request, res: Response) => {
 		});
 		return;
 	}
+	if(!req.body.parentCompanyId){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "You must provide a parent company id"
+		});
+		return;
+	}
+	
 	//create a company
 	try {
 		// add comapny to parent company

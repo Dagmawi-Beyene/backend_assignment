@@ -49,6 +49,14 @@ export const createStationType = async (req: Request, res: Response) => {
 		});
 		return;
 	}
+	if(!req.body.maxPower){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "maxPower can not be empty!"
+		});
+		return;
+	}
 	//create a station type
 	try {
 		const stationType = await StationType.create({
@@ -78,6 +86,14 @@ export const updateStationType = async (req: Request, res: Response) => {
 			"success": false,
 			"statusCode": 400,
 			"message": "Content can not be empty!"
+		});
+		return;
+	}
+	if(!req.body.maxPower){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "maxPower can not be empty!"
 		});
 		return;
 	}

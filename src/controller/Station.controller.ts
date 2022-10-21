@@ -42,7 +42,7 @@ export const getStation = async (req: Request, res: Response) => {
 }
 
 export const createStation = async (req: Request, res: Response) => {
-	//validate the request
+	// validate the request
 	if(!req.body.name){
 		res.status(400).send({
 			"success": false,
@@ -51,6 +51,25 @@ export const createStation = async (req: Request, res: Response) => {
 		});
 		return;
 	}
+	if(!req.body.companyId){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "Content can not be empty!"
+		});
+		return;
+	}
+	if(!req.body.stationTypeId){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "Content can not be empty!"
+		});
+		return;
+	}
+
+	
+
 	
 	try {
 		const ownerCompany = await Company.findOne(req.body.ownerCompanyId);
@@ -86,6 +105,23 @@ export const updateStation = async (req: Request, res: Response) => {
 		});
 		return;
 	}
+	if(!req.body.ownerCompanyId){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "Content can not be empty!"
+		});
+		return;
+	}
+	if(!req.body.stationTypeId){
+		res.status(400).send({
+			"success": false,
+			"statusCode": 400,
+			"message": "Content can not be empty!"
+		});
+		return;
+	}
+
 	//update a station
 	try {
 		const ownerCompany = await Company.findOne(req.body.ownerCompanyId);
